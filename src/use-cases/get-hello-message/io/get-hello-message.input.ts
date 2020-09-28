@@ -2,7 +2,11 @@ import { ApiProperty, } from "@nestjs/swagger";
 import { IsAlpha, IsOptional } from "class-validator";
 
 export class GetHelloMessageInput {
-    @ApiProperty({ required: false })
+    @ApiProperty({
+        description: 'The name to customize the message',
+        required: false,
+        example: 'Mikey'
+    })
     @IsOptional()
     @IsAlpha()
     name?: string;
