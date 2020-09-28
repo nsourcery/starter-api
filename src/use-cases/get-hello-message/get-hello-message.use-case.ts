@@ -7,6 +7,6 @@ import { GetHelloMessageOutput } from './io/get-hello-message.output';
 export class GetHelloMessageUseCase {
   async activate(input: GetHelloMessageInput): Promise<GetHelloMessageOutput> {
     const entity = new HelloMessage(`Hello ${input.name || 'World'}!`);
-    return new GetHelloMessageOutput(entity.message);
+    return Promise.resolve(new GetHelloMessageOutput(entity.message));
   }
 }
