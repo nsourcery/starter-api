@@ -8,7 +8,7 @@ export class GetHelloMessageInput {
         example: 'Mikey'
     })
     @IsOptional()
-    @IsAlpha()
+    @IsAlpha('pt-BR', { message: 'Nome precisa ser composto apenas de letras ex.: a-zA-Z' })
     name?: string;
 
     constructor(name?: string) {
