@@ -4,9 +4,9 @@ import { GetHelloMessageUseCase } from '../../use-cases/get-hello-message/get-he
 import { GetHelloMessageInput } from '../../use-cases/get-hello-message/io/get-hello-message.input';
 import { GetHelloMessageOutput } from '../../use-cases/get-hello-message/io/get-hello-message.output';
 
-describe('AppRouter', () => {
-  let appRouter: GetHelloMessageRouter;
-  let getHelloMessage: GetHelloMessageUseCase;
+describe(GetHelloMessageRouter.name, () => {
+  let instance: GetHelloMessageRouter;
+  let useCase: GetHelloMessageUseCase;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -14,17 +14,39 @@ describe('AppRouter', () => {
       providers: [GetHelloMessageUseCase],
     }).compile();
 
-    appRouter = app.get(GetHelloMessageRouter);
-    getHelloMessage = app.get(GetHelloMessageUseCase)
+    instance = app.get(GetHelloMessageRouter);
+    useCase = app.get(GetHelloMessageUseCase)
   });
 
-  describe('GET /hello', () => {
-    it('should return "Hello World!"', async () => {
-      jest.spyOn(getHelloMessage, 'activate')
-        .mockImplementation(() => Promise.resolve(new GetHelloMessageOutput()));
+  it('should return "Hello World!"', async () => {
+    // SETUP
+    const expected = new GetHelloMessageOutput()
+    jest.spyOn(useCase, 'activate')
+      .mockImplementation(() => Promise.resolve(expected));
 
-      const actual = await appRouter.activate(new GetHelloMessageInput());
-      expect(actual).toBe('Hello World!');
-    });
+    //given: a new input
+    const input = new GetHelloMessageInput();
+
+    //when: route is activated
+    const actual = await instance.activate(input);
+
+    //then: expected is the output
+    expect(actual).toBe(expected);
+  });
+
+  it('should return "Hello Mock!"', async () => {
+    // SETUP
+    const expected = new GetHelloMessageOutput('Hello Mock!')
+    jest.spyOn(useCase, 'activate')
+      .mockImplementation(() => Promise.resolve(expected));
+
+    //given: a new input
+    const input = new GetHelloMessageInput('Mock');
+
+    //when: route is activated
+    const actual = await instance.activate(input);
+
+    //then: expected is the output
+    expect(actual).toBe(expected);
   });
 });

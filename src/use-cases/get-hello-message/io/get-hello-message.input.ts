@@ -7,4 +7,8 @@ export class GetHelloMessageInput {
     @IsOptional()
     @IsAlpha()
     name?: string;
+
+    constructor(name?: string) {
+        this.name = name;
+    }
 }
