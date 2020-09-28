@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { MultiDatabaseModule } from '@nsourcery/databases';
 import { EnvironmentModule } from '@nsourcery/env';
 import { AutoSwaggerModule } from '@nsourcery/swagger';

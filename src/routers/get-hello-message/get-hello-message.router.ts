@@ -4,7 +4,6 @@ import { GetHelloMessageInput } from '../../use-cases/get-hello-message/io/get-h
 import { GetHelloMessageOutput } from '../../use-cases/get-hello-message/io/get-hello-message.output';
 import { GetHelloMessageUseCase } from '../../use-cases/get-hello-message/get-hello-message.use-case';
 
-
 class ServerError {
   @ApiProperty()
   statusCode: number;

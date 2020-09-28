@@ -1,9 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { GetHelloMessageOutput } from '../src/use-cases/get-hello-message/io/get-hello-message.output';
+import { GetHelloMessageInput } from '../src/use-cases/get-hello-message/io/get-hello-message.input';
+import { ClassTransformer } from 'class-transformer';
 
-describe('AppController (e2e)', () => {
+describe('StarterApi (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,10 +18,22 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  afterEach(async () => await app.close());
+
+  it('GET /hello', (x) => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/hello')
       .expect(200)
-      .expect('Hello World!');
+      .expect({ message: 'Hello World!' })
+      .end(x);
+  });
+
+  it('GET /hello?name=Mock', (x) => {
+    return request(app.getHttpServer())
+      .get('/hello')
+      .query(new GetHelloMessageInput('Mock'))
+      .expect(200)
+      .expect({ message: 'Hello Mock!' })
+      .end(x);
   });
 });

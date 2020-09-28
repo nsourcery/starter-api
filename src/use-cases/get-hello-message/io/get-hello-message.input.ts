@@ -1,7 +1,6 @@
-import { ApiExtraModels, ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, } from "@nestjs/swagger";
 import { IsAlpha, IsOptional } from "class-validator";
 
-@ApiExtraModels()
 export class GetHelloMessageInput {
     @ApiProperty({ required: false })
     @IsOptional()
