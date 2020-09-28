@@ -1,10 +1,10 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class GetHelloMessageOutput {
+    @ApiProperty()
+    message: string;
 
-    errors?: Array<string>;
-    message?: string;
-
-    constructor(message?: string, errors?: Array<string>) {
+    constructor(message?: string) {
         this.message = message;
-        this.errors = errors;
     }
 }
