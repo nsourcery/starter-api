@@ -5,7 +5,7 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "repository": "https://github.com/nsourcery/starter-lib",
+  "repository": "https://github.com/nsourcery/starter-api",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
